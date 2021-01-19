@@ -23,16 +23,10 @@ public class LoginController {
     String login(@RequestParam String phone, @RequestParam String password){
         User user = userService.getUserByPhone(phone);
         System.out.println(user);
-        if((!password.isEmpty()) && password.equals(user.getPassword())){
+        if((!password.isEmpty()) && user!=null && password.equals(user.getPassword())){
             return Result.LOGIN_SUCCESS.toString();
         }
         return Result.LOGIN_ERROR.toString();
-    }
-
-    @GetMapping("/hello")
-    @ResponseBody
-    String hello(){
-        return "Hello";
     }
 
     @GetMapping("/allUsers")
